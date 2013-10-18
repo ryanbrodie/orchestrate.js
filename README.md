@@ -1,4 +1,4 @@
 orchestrate.js
 ==============
 
-Node Client Library for the Orchestrate.io API
+Node Driver for Orchestrate.io

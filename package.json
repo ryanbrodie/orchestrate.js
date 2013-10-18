@@ -1,0 +1,20 @@
+{
+  "name": "orchestrate",
+  "version": "0.0.1",
+  "main": "index",
+  "tags": [
+    "orchestrate",
+    "driver"
+  ],
+  "dependencies": {
+    "request": "~2.27.0",
+    "kew": "~0.2.2"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "expect.js": "0.1.x"
+  },
+  "scripts": {
+    "test": "make test"
+  }
+}
