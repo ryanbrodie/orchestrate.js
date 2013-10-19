@@ -3,4 +3,4 @@
  * @author Steve Kaliski <steve@bowery.io>
  */
 
-module.exports = require('./lib/orchestrate')
+module.exports = require('./lib/client')
