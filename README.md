@@ -40,7 +40,7 @@ All queries are promise based. Just as a typical function would return a callbac
 To find a value:
 
 ```javascript
-db.get('collection', 'key)
+db.get('collection', 'key')
 .then(function (result) {
 
 })
