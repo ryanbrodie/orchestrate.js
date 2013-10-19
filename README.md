@@ -1,11 +1,10 @@
 # orchestrate.js
----
 
 Node Driver for [Orchestrate.io](http://orchestrate.io).
 
 
 # Installation
----
+
 ```
 $ npm install orchestrate
 ```
@@ -25,7 +24,6 @@ $ npm test
 ```
 
 # Creating a Client
----
 
 ```javascript
 var db = require('orchestrate')(token)
@@ -69,6 +67,7 @@ db.put('collection', 'key', {
 
 ## Search
 
+```javascript
 db.search('collection', 'query')
 .then(function (result) {
 
@@ -76,3 +75,4 @@ db.search('collection', 'query')
 .fail(function (err) {
 
 })
+```
