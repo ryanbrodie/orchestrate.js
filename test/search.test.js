@@ -25,21 +25,21 @@ var fakeOrchestrate = nock('https://api.orchestrate.io/')
   .get('/v0/users?query=new%20york')
   .reply(200, {
     "results": [
-        {
-            "path": {
-                "collection": "users",
-                "key": "sjkaliski@gmail.com",
-                "ref": "0eb6642ca3efde45"
-            },
-            "value": {
-                "name": "Steve Kaliski",
-                "email": "sjkaliski@gmail.com",
-                "location": "New York",
-                "type": "paid",
-                "gender": "male"
-            },
-            "score": 0.10848885029554367
-        }
+      {
+        "path": {
+          "collection": "users",
+          "key": "sjkaliski@gmail.com",
+          "ref": "0eb6642ca3efde45"
+        },
+        "value": {
+          "name": "Steve Kaliski",
+          "email": "sjkaliski@gmail.com",
+          "location": "New York",
+          "type": "paid",
+          "gender": "male"
+        },
+        "score": 0.10848885029554367
+      }
     ],
     "count": 1,
     "max_score": 0.10848885029554367

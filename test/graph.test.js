@@ -22,17 +22,17 @@ var fakeOrchestrate = nock('https://api.orchestrate.io')
   .get('/v0/users/sjkaliski@gmail.com/relations/likes')
   .reply(200, {
     "results": [
-        {
-            "path": {
-                "collection": "movies",
-                "key": "Superbad",
-                "ref": "56e22c26346f9015"
-            },
-            "value": {
-                "title": "Superbad",
-                "year": 2007
-            }
+      {
+        "path": {
+          "collection": "movies",
+          "key": "Superbad",
+          "ref": "56e22c26346f9015"
+        },
+        "value": {
+          "title": "Superbad",
+           "year": 2007
         }
+      }
     ],
     "count": 1
   })
