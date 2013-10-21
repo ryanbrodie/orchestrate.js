@@ -82,25 +82,42 @@ An awesome feature Orchestrate includes is the ability to generate graphs betwee
 
 ```javascript
 db.newGraphBuilder()
-  .from('users', 'Steve')
-  .related('likes')
-  .to('movies', 'Superbad')
+.from('users', 'Steve')
+.related('likes')
+.to('movies', 'Superbad')
 ```
 
 We can then look up all the different items Steve likes:
 ```javascript
 db.newGraphReader()
-  .from('users', 'Steve')
-  .related('likes')
+.from('users', 'Steve')
+.related('likes')
 ```
 
 We can even take this another step further:
 ```javascript
 db.newGraphReader()
-  .from('users', 'Steve')
-  .related('friends', 'likes')
+.from('users', 'Steve')
+.related('friends', 'likes')
 ```
 This will return all of the things that friends of Steve have liked. This assumes a friend relation has previously been defined between Steve and another user.
 
 ## Events
 Events are time-ordered objects that exist with the context of a Key-Value object. Consider comments on a post or messages in a thread.
+
+Creating an event:
+```javascript
+db.newEventBuilder()
+.from('users', 'Steve')
+.type('update')
+.data({"text": "Hello!"})
+```
+
+Getting events:
+```javascript
+db.newEventReader()
+.from('users', 'Steve')
+.type('update')
+```
+
+Support from time range requests coming.
