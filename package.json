@@ -12,7 +12,8 @@
   },
   "devDependencies": {
     "mocha": "*",
-    "expect.js": "0.1.x"
+    "expect.js": "0.1.x",
+    "nock": "*"
   },
   "scripts": {
     "test": "make test"
