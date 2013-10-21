@@ -1,6 +1,6 @@
+// Copyright 2013 Bowery Software, LLC
 /**
- * @fileoverview Module exports.
- * @author Steve Kaliski <steve@bowery.io>
+ * @fileoverview Expose db client.
  */
 
 module.exports = require('./lib/client')

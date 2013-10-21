@@ -14,12 +14,29 @@ var db = require('../')(token)
 //   "type": "paid",
 //   "gender": "male"
 // })
-
-// db.remove('users', 'byrd@gmail.com')
+// .then(function (res) {
+//   db.get('users', 'byrd@gmail.com')
+//   .then(function (res) {
+//     console.log(JSON.parse(res.body))
+//   })
+// })
 
 // db.createGraphRelation('users', 'sjkaliski@gmail.com', )
 
-db.createGraph()
+db.newGraphBuilder()
   .from('users', 'sjkaliski@gmail.com')
   .related('likes')
-  .to('movies', 'Shawshank Redemption')
+  .to('movies', 'The Matrix')
+  .then(function (res) {
+    console.log(res.body)
+  })
+  .fail(function (err) {
+    console.log(err)
+  })
+
+// db.newGraphReader()
+//   .from('users', 'sjkaliski@gmail.com')
+//   .related('likes')
+//   .then(function (res) {
+    
+//   })
