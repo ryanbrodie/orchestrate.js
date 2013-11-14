@@ -65,6 +65,18 @@ db.put('collection', 'key', {
 })
 ```
 
+To remove a value:
+
+```javascript
+db.remove('collection', 'key')
+.then(function (result) {
+  
+})
+.fail(function (err) {
+  
+})
+```
+
 ## Search
 
 ```javascript
@@ -117,7 +129,14 @@ Getting events:
 ```javascript
 db.newEventReader()
 .from('users', 'Steve')
+.start(1384534722568)
+.end(1384535726540)
 .type('update')
 ```
 
-Support from time range requests coming.
+## Removing a Collection
+
+```javascript
+db.deleteCollection('users')
+```
+
