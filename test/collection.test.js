@@ -1,6 +1,6 @@
 // Copyright 2013 Bowery Software, LLC
 /**
- * @fileoverview Test Search methods.
+ * @fileoverview Test collection methods.
  */
 
 
@@ -44,6 +44,8 @@ var fakeOrchestrate = nock('https://api.orchestrate.io/')
     "count": 1,
     "max_score": 0.10848885029554367
   })
+  .delete('/v0/users?force=true')
+  .reply(204)
 
 suite('Search', function () {
   test('Get value by query', function (done) {
@@ -51,6 +53,14 @@ suite('Search', function () {
     .then(function (res) {
       assert.equal(200, res.statusCode)
       assert.deepEqual(JSON.parse(res.body).results[0].value, users.steve)
+      done()
+    })
+  })
+
+  test('Delete collection', function (done) {
+    db.deleteCollection('users')
+    .then(function (res) {
+      assert.equal(204, res.statusCode)
       done()
     })
   })
