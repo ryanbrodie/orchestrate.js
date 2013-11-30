@@ -79,6 +79,8 @@ db.remove('collection', 'key')
 
 ## Search
 
+To run a quick search, you can simply provide the collection you'd like to search within, and your query. Orchestrate supports any type of query including lucene queries.
+
 ```javascript
 db.search('collection', 'query')
 .then(function (result) {
@@ -87,6 +89,16 @@ db.search('collection', 'query')
 .fail(function (err) {
 
 })
+```
+
+If you want to include a limit or offset, the more verbose `SearchBuilder` is available:
+
+```javascript
+db.newSearchBuilder()
+.collection('users')
+.limit(100)
+.offset(10)
+.query('steve')
 ```
 
 ## Graphs
