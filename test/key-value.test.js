@@ -34,6 +34,8 @@ var fakeOrchestrate = nock('https://api.orchestrate.io/')
   .reply(200, users.steve)
   .put('/v0/users/byrd@bowery.io')
   .reply(201)
+  .put('/v0/users/byrd@bowery.io')
+  .reply(201)
   .delete('/v0/users/byrd@bowery.io')
   .reply(204)
 
@@ -49,6 +51,14 @@ suite('Key-Value', function () {
 
   test('Store value at key', function (done) {
     db.put('users', 'byrd@bowery.io', users.david)
+    .then(function (res) {
+      assert.equal(201, res.statusCode)
+      done()
+    })
+  })
+
+  test('Store value at key with conditional', function (done) {
+    db.put('users', 'byrd@bowery.io', users.david, false)
     .then(function (res) {
       assert.equal(201, res.statusCode)
       done()

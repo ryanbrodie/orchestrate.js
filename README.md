@@ -65,6 +65,13 @@ db.put('collection', 'key', {
 })
 ```
 
+Orchestrate also supports [conditional put statements](https://docs.orchestrate.io/#put-(create/update)) that determines whether or not the store operation will occur. `db.put` takes a fourth argument `match` which is either the `ref` value or `false`. If a ref value is provided an `update` will occur if there is a valid match, if false is provided, a `create` will occur if there is no match.
+
+```javascript
+db.put('collection', 'key', data, 'cbb48f9464612f20') // update
+db.put('collection', 'key', data, false) // create
+```
+
 To remove a value:
 
 ```javascript
