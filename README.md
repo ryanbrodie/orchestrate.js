@@ -65,6 +65,13 @@ db.put('collection', 'key', {
 })
 ```
 
+Orchestrate also supports [conditional put statements](https://docs.orchestrate.io/#put-(create/update)) that determines whether or not the store operation will occur. `db.put` takes a fourth argument `match` which is either the `ref` value or `false`. If a ref value is provided an `update` will occur if there is a valid match, if false is provided, a `create` will occur if there is no match.
+
+```javascript
+db.put('collection', 'key', data, 'cbb48f9464612f20') // update
+db.put('collection', 'key', data, false) // create
+```
+
 To remove a value:
 
 ```javascript
@@ -79,6 +86,8 @@ db.remove('collection', 'key')
 
 ## Search
 
+To run a quick search, you can simply provide the collection you'd like to search within, and your query. Orchestrate supports any type of query including lucene queries.
+
 ```javascript
 db.search('collection', 'query')
 .then(function (result) {
@@ -87,6 +96,16 @@ db.search('collection', 'query')
 .fail(function (err) {
 
 })
+```
+
+If you want to include a limit or offset, the more verbose `SearchBuilder` is available:
+
+```javascript
+db.newSearchBuilder()
+.collection('users')
+.limit(100)
+.offset(10)
+.query('steve')
 ```
 
 ## Graphs
