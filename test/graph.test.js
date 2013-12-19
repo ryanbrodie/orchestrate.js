@@ -19,7 +19,7 @@ var movies = {
 
 // Override http requests.
 var fakeOrchestrate = nock('https://api.orchestrate.io')
-  .get('/v0/users/sjkaliski@gmail.com/relations/likes')
+  .get('/v0/users/sjkaliski%40gmail.com/relations/likes')
   .reply(200, {
     "results": [
       {
@@ -36,7 +36,7 @@ var fakeOrchestrate = nock('https://api.orchestrate.io')
     ],
     "count": 1
   })
-  .put('/v0/users/sjkaliski@gmail.com/relation/likes/movies/Superbad')
+  .put('/v0/users/sjkaliski%40gmail.com/relation/likes/movies/Superbad')
   .reply(204)
 
 suite('Graph', function () {

@@ -30,13 +30,13 @@ var users = {
 
 // Override http requests.
 var fakeOrchestrate = nock('https://api.orchestrate.io/')
-  .get('/v0/users/sjkaliski@gmail.com')
+  .get('/v0/users/sjkaliski%40gmail.com')
   .reply(200, users.steve)
-  .put('/v0/users/byrd@bowery.io')
+  .put('/v0/users/byrd%40bowery.io')
   .reply(201)
-  .put('/v0/users/byrd@bowery.io')
+  .put('/v0/users/byrd%40bowery.io')
   .reply(201)
-  .delete('/v0/users/byrd@bowery.io')
+  .delete('/v0/users/byrd%40bowery.io')
   .reply(204)
 
 suite('Key-Value', function () {
