@@ -21,7 +21,7 @@ var updates = [
 
 // Override http requests.
 var fakeOrchestrate = nock('https://api.orchestrate.io')
-  .get('/v0/users/sjkaliski@gmail.com/events/update')
+  .get('/v0/users/sjkaliski%40gmail.com/events/update')
   .reply(200, {
     "results": [
       {
@@ -33,7 +33,7 @@ var fakeOrchestrate = nock('https://api.orchestrate.io')
     ],
     "count": 1
   })
-  .put('/v0/users/sjkaliski@gmail.com/events/update')
+  .put('/v0/users/sjkaliski%40gmail.com/events/update')
   .reply(201)
 
 suite('Event', function () {
