@@ -47,12 +47,12 @@ var fakeOrchestrate = nock('https://api.orchestrate.io/')
   .delete('/v0/users?force=true')
   .reply(204)
 
-suite('Search', function () {
+suite('Collection', function () {
   test('Get value by query', function (done) {
     db.search('users', 'new york')
     .then(function (res) {
       assert.equal(200, res.statusCode)
-      assert.deepEqual(JSON.parse(res.body).results[0].value, users.steve)
+      assert.deepEqual(res.body.results[0].value, users.steve)
       done()
     })
   })
