@@ -56,7 +56,7 @@ suite('Search', function () {
     .query('new york')
     .then(function (res) {
       assert.equal(200, res.statusCode)
-      assert.deepEqual(JSON.parse(res.body).results[0].value, users.steve)
+      assert.deepEqual(res.body.results[0].value, users.steve)
       done()
     })
   })

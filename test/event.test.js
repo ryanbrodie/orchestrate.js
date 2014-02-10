@@ -42,7 +42,7 @@ suite('Event', function () {
     .from('users', 'sjkaliski@gmail.com')
     .type('update')
     .then(function (res) {
-      assert.deepEqual(JSON.parse(res.body).results[0], updates[0])
+      assert.deepEqual(res.body.results[0], updates[0])
       done()
     })
   })

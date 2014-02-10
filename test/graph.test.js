@@ -45,7 +45,7 @@ suite('Graph', function () {
     .from('users', 'sjkaliski@gmail.com')
     .related('likes')
     .then(function (res) {
-      assert.deepEqual(JSON.parse(res.body).results[0].value, movies.superbad)
+      assert.deepEqual(res.body.results[0].value, movies.superbad)
       done()
     })
   })

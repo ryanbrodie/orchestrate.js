@@ -28,10 +28,17 @@ var users = {
   }
 }
 
+var listResponse = {
+  "count": 1,
+  "results": [{value: users.steve}]
+}
+
 // Override http requests.
 var fakeOrchestrate = nock('https://api.orchestrate.io/')
   .get('/v0/users/sjkaliski%40gmail.com')
   .reply(200, users.steve)
+  .get('/v0/users')
+  .reply(200, listResponse)
   .put('/v0/users/byrd%40bowery.io')
   .reply(201)
   .put('/v0/users/byrd%40bowery.io')
@@ -44,7 +51,16 @@ suite('Key-Value', function () {
     db.get('users', 'sjkaliski@gmail.com')
     .then(function (res) {
       assert.equal(200, res.statusCode)
-      assert.deepEqual(users.steve, JSON.parse(res.body))
+      assert.deepEqual(users.steve, res.body)
+      done()
+    })
+  })
+
+  test('Get list of values by collection name', function (done) {
+    db.list('users')
+    .then(function (res) {
+      assert.equal(200, res.statusCode)
+      assert.deepEqual(users.steve, res.body.results[0].value)
       done()
     })
   })
