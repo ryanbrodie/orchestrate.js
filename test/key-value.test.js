@@ -45,6 +45,8 @@ var fakeOrchestrate = nock('https://api.orchestrate.io/')
   .reply(201)
   .delete('/v0/users/byrd%40bowery.io')
   .reply(204)
+  .delete('/v0/users/byrd%40bowery.io?purge=true')
+  .reply(204)
 
 suite('Key-Value', function () {
   test('Get value by key', function (done) {
@@ -83,6 +85,14 @@ suite('Key-Value', function () {
 
   test('Remove value by key', function (done) {
     db.remove('users', 'byrd@bowery.io')
+    .then(function (res) {
+      assert.equal(204, res.statusCode)
+      done()
+    })
+  })
+
+  test('Remove value by key and purge', function (done) {
+    db.remove('users', 'byrd@bowery.io', true)
     .then(function (res) {
       assert.equal(204, res.statusCode)
       done()
