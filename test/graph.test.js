@@ -38,10 +38,13 @@ var fakeOrchestrate = nock('https://api.orchestrate.io')
   })
   .put('/v0/users/sjkaliski%40gmail.com/relation/likes/movies/Superbad')
   .reply(204)
+  .delete('/v0/users/sjkaliski%40gmail.com/relation/likes/movies/Superbad?purge=true')
+  .reply(204)
 
 suite('Graph', function () {
   test('Get graph relationship', function (done) {
     db.newGraphReader()
+    .get()
     .from('users', 'sjkaliski@gmail.com')
     .related('likes')
     .then(function (res) {
@@ -52,6 +55,19 @@ suite('Graph', function () {
 
   test('Create graph relationship', function (done) {
     db.newGraphBuilder()
+    .create()
+    .from('users', 'sjkaliski@gmail.com')
+    .related('likes')
+    .to('movies', 'Superbad')
+    .then(function (res) {
+      assert.equal(res.statusCode, 204)
+      done()
+    })
+  })
+
+  test('Delete a graph relationship', function (done) {
+    db.newGraphBuilder()
+    .remove()
     .from('users', 'sjkaliski@gmail.com')
     .related('likes')
     .to('movies', 'Superbad')

@@ -65,6 +65,14 @@ db.put('collection', 'key', {
 })
 ```
 
+To remove a value:
+
+```javascript
+db.remove('collection', 'key', true)
+```
+
+The last parameter is optional. If supplied the ref history will be removed as well.
+
 Orchestrate also supports [conditional put statements](https://docs.orchestrate.io/#put-(create/update)) that determines whether or not the store operation will occur. `db.put` takes a fourth argument `match` which is either the `ref` value or `false`. If a ref value is provided an `update` will occur if there is a valid match, if false is provided, a `create` will occur if there is no match.
 
 ```javascript
@@ -113,6 +121,7 @@ An awesome feature Orchestrate includes is the ability to generate graphs betwee
 
 ```javascript
 db.newGraphBuilder()
+.create()
 .from('users', 'Steve')
 .related('likes')
 .to('movies', 'Superbad')
@@ -121,6 +130,7 @@ db.newGraphBuilder()
 We can then look up all the different items Steve likes:
 ```javascript
 db.newGraphReader()
+.get()
 .from('users', 'Steve')
 .related('likes')
 ```
@@ -128,10 +138,20 @@ db.newGraphReader()
 We can even take this another step further:
 ```javascript
 db.newGraphReader()
+.get()
 .from('users', 'Steve')
 .related('friends', 'likes')
 ```
 This will return all of the things that friends of Steve have liked. This assumes a friend relation has previously been defined between Steve and another user.
+
+If we want to delete a graph relationship:
+```javascript
+db.newGraphBuilder()
+.remove()
+.from('users', 'Steve')
+.related('likes')
+.to('movies', 'Superbad')
+```
 
 ## Events
 Events are time-ordered objects that exist with the context of a Key-Value object. Consider comments on a post or messages in a thread.
