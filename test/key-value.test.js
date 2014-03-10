@@ -30,6 +30,7 @@ var users = {
 
 var listResponse = {
   "count": 1,
+  "next": "/v0/users?limit=2&afterKey=002",
   "results": [{value: users.steve}]
 }
 
@@ -63,6 +64,7 @@ suite('Key-Value', function () {
     .then(function (res) {
       assert.equal(200, res.statusCode)
       assert.deepEqual(users.steve, res.body.results[0].value)
+      assert.equal(true, typeof res.body.next == 'function')
       done()
     })
   })
