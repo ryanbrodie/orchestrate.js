@@ -30,6 +30,7 @@ var users = {
 
 var listResponse = {
   "count": 1,
+  "next": "/v0/users?limit=2&afterKey=002",
   "results": [{value: users.steve}]
 }
 
@@ -38,7 +39,7 @@ var fakeOrchestrate = nock('https://api.orchestrate.io/')
   .get('/v0/users/sjkaliski%40gmail.com')
   .reply(200, users.steve)
   .get('/v0/users')
-  .reply(200, listResponse)
+  .reply(200, listResponse, {'Link':'</v0/users?limit=2&afterKey=002>; rel="next"'})
   .put('/v0/users/byrd%40bowery.io')
   .reply(201)
   .put('/v0/users/byrd%40bowery.io')
@@ -63,6 +64,7 @@ suite('Key-Value', function () {
     .then(function (res) {
       assert.equal(200, res.statusCode)
       assert.deepEqual(users.steve, res.body.results[0].value)
+      assert.equal(true, typeof res.links.next.get == 'function')
       done()
     })
   })
