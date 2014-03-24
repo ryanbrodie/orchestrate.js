@@ -31,7 +31,7 @@ var db = require('orchestrate')(token)
 
 # Running Queries
 
-Orchestrate comes with support for GET/PUT/DEL for key-value queries, as well as search, graph, and events. Documentation can be found [here](https://docs.orchestrate.io/).
+Orchestrate comes with support for GET/PUT/DEL for key-value queries, as well as search, graph, and events. Documentation can be found [here](https://orchestrate.io/docs/api/).
 
 All queries are promise based. Just as a typical function would return a callback containing an error field followed by a result, orchestrate.js returns `then` and `fail` methods.
 
@@ -65,7 +65,7 @@ db.put('collection', 'key', {
 })
 ```
 
-Orchestrate also supports [conditional put statements](https://docs.orchestrate.io/#put-(create/update)) that determines whether or not the store operation will occur. `db.put` takes a fourth argument `match` which is either the `ref` value or `false`. If a ref value is provided an `update` will occur if there is a valid match, if false is provided, a `create` will occur if there is no match.
+Orchestrate also supports [conditional put statements](https://orchestrate.io/docs/api/#key/value/put-(create/update)) that determines whether or not the store operation will occur. `db.put` takes a fourth argument `match` which is either the `ref` value or `false`. If a ref value is provided an `update` will occur if there is a valid match, if false is provided, a `create` will occur if there is no match.
 
 ```javascript
 db.put('collection', 'key', data, 'cbb48f9464612f20') // update
@@ -85,6 +85,52 @@ db.remove('collection', 'key', true)
 ```
 
 The last parameter is optional. If supplied the ref history will be removed as well.
+
+## Collection Listing
+
+To list items in a collection, you can use [collection listings](https://orchestrate.io/docs/api/#key/value/list).
+
+```javascript
+db.list('collection')
+.then(function (result) {
+  var items = result.body.results;
+})
+.fail(function (err) {
+
+})
+```
+
+Collection listings allow you to page through your collection in key order (sorted lexicographically so be aware of that if you have numeric keys). It is also useful to list parts of your collection starting from a particular key. For example, to list the first 10 keys starting from key 'c':
+
+
+```javascript
+db.list('address-book', 10, 'c')
+.then(function (result) {
+
+})
+.fail(function (err) {
+
+})
+```
+
+Note: if there is no item with key 'c', the first page will simply have the first 10 results that sort after 'c'.
+
+Collection listings support pagination. If there are more items that follow the page that was retrieved, the result will have a 'links.next' that you can use to fetch the next page.
+
+```javascript
+db.list('address-book', 10, 'c')
+.then(function (page1) {
+  // Got First Page
+  if (page1.links && page1.links.next) {
+    page1.links.next.get().then(function (page2) {
+      // Got Second Page
+    })
+  }
+})
+.fail(function (err) {
+
+})
+```
 
 ## Search
 
