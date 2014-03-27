@@ -1,4 +1,4 @@
-# orchestrate.js [![Build Status](https://travis-ci.org/Bowery/orchestrate.js.png)](https://travis-ci.org/Bowery/orchestrate.js)
+# orchestrate.js [![Build Status](https://travis-ci.org/orchestrate-io/orchestrate.js.png)](https://travis-ci.org/orchestrate-io/orchestrate.js)
 
 Node Driver for [Orchestrate.io](http://orchestrate.io).
 
