@@ -34,6 +34,11 @@ var listResponse = {
   "results": [{value: users.steve}]
 }
 
+var page2Response = {
+  "count": 1,
+  "results": [{value: users.david}]
+}
+
 // Override http requests.
 var fakeOrchestrate = nock('https://api.orchestrate.io/')
   .get('/v0/users/sjkaliski%40gmail.com')
@@ -48,6 +53,8 @@ var fakeOrchestrate = nock('https://api.orchestrate.io/')
   .reply(204)
   .delete('/v0/users/byrd%40bowery.io?purge=true')
   .reply(204)
+  .get('/v0/users?afterKey=002')
+  .reply(200, page2Response)
 
 suite('Key-Value', function () {
   test('Get value by key', function (done) {
@@ -97,6 +104,15 @@ suite('Key-Value', function () {
     db.remove('users', 'byrd@bowery.io', true)
     .then(function (res) {
       assert.equal(204, res.statusCode)
+      done()
+    })
+  })
+
+  test('Request collection items afterKey', function (done) {
+    db.list('users', {afterKey:'002'})
+    .then(function (res) {
+      assert.equal(200, res.statusCode)
+      assert.deepEqual(users.david, res.body.results[0].value)
       done()
     })
   })
