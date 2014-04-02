@@ -104,7 +104,7 @@ Collection listings allow you to page through your collection in key order (sort
 
 
 ```javascript
-db.list('address-book', 10, 'c')
+db.list('address-book', {limit:10, startKey:'c'})
 .then(function (result) {
 
 })
@@ -118,7 +118,7 @@ Note: if there is no item with key 'c', the first page will simply have the firs
 Collection listings support pagination. If there are more items that follow the page that was retrieved, the result will have a 'links.next' that you can use to fetch the next page.
 
 ```javascript
-db.list('address-book', 10, 'c')
+db.list('address-book', {limit:10, startKey:'c'})
 .then(function (page1) {
   // Got First Page
   if (page1.links && page1.links.next) {
