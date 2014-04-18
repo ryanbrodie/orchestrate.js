@@ -204,6 +204,15 @@ db.newEventBuilder()
 .data({"text": "Hello!"})
 ```
 
+Creating an event at a specified time:
+```javascript
+db.newEventBuilder()
+.from('users', 'Steve')
+.type('update')
+.time(1384534722568)
+.data({"text": "Hello!"})
+```
+
 Getting events:
 ```javascript
 db.newEventReader()
