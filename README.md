@@ -67,6 +67,7 @@ db.put('collection', 'key', {
 
 Orchestrate also supports [conditional put statements](https://orchestrate.io/docs/api/#key/value/put-(create/update)) that determines whether or not the store operation will occur. `db.put` takes a fourth argument `match` which is either the `ref` value or `false`. If a ref value is provided an `update` will occur if there is a valid match, if false is provided, a `create` will occur if there is no match.
 
+
 ```javascript
 db.put('collection', 'key', data, 'cbb48f9464612f20') // update
 db.put('collection', 'key', data, false) // create
@@ -85,6 +86,10 @@ db.remove('collection', 'key', true)
 ```
 
 The last parameter is optional. If supplied the ref history will be removed as well.
+
+## Collection Creation
+
+There is no need to explicitly create a collection. Collections are implicitly created when putting a key/value object.
 
 ## Collection Listing
 
@@ -130,6 +135,12 @@ db.list('address-book', {limit:10, startKey:'c'})
 .fail(function (err) {
 
 })
+```
+
+## Collection Deletes
+
+```javascript
+db.deleteCollection('users')
 ```
 
 ## Search
@@ -220,11 +231,5 @@ db.newEventReader()
 .start(1384534722568)
 .end(1384535726540)
 .type('update')
-```
-
-## Removing a Collection
-
-```javascript
-db.deleteCollection('users')
 ```
 
