@@ -1,6 +1,30 @@
 {
   "name": "orchestrate",
-  "version": "0.1.0",
+  "description": "Orchestrate is a database service. It is a simple REST API that is optimized for queries. Orchestrate combines full-text search, graph, time-series, and key/value.",
+  "keywords": [
+    "full-text search",
+    "search",
+    "database",
+    "dbaas",
+    "graph",
+    "orchestrate",
+    "key",
+    "value",
+    "events",
+    "time-series"
+  ],
+  "homepage": "http://orchestrate.io/docs/api",
+  "bugs": {
+    "url": "https://github.com/orchestrate-io/orchestrate.js/issues",
+    "email": "support@orchestrate.io"
+  },
+  "license": "Apache-2.0",
+  "author": {
+    "email": "steve@bowery.io",
+    "url": "http://stevekaliski.com",
+    "name": "Steve Kaliski"
+  },
+  "version": "0.1.1",
   "main": "index",
   "tags": [
     "orchestrate",
