@@ -233,3 +233,16 @@ db.newEventReader()
 .type('update')
 ```
 
+## Validate Key
+
+If you want to make sure your key is valid, you can simply "ping" Orchestrate.
+
+```javascript
+db.ping()
+.then(function () {
+  // you key is VALID
+})
+.fail(function (err) {
+  // your key is INVALID
+})
+```
