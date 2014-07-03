@@ -25,6 +25,13 @@ var users = {
     "location": "New York",
     "type": "paid",
     "gender": "male"
+  },
+  kelsey: {
+    "name": "Kelsey Jarblenkins",
+    "email": "kelsey@jarblenkins.com",
+    "location": "Boston, MA",
+    "type": "free",
+    "gender": "genderqueer"
   }
 }
 
@@ -45,6 +52,8 @@ var fakeOrchestrate = nock('https://api.orchestrate.io/')
   .reply(200, users.steve)
   .get('/v0/users')
   .reply(200, listResponse, {'Link':'</v0/users?limit=2&afterKey=002>; rel="next"'})
+  .post('/v0/users')
+  .reply(201)
   .put('/v0/users/byrd%40bowery.io')
   .reply(201)
   .put('/v0/users/byrd%40bowery.io')
@@ -74,6 +83,14 @@ suite('Key-Value', function () {
       assert.equal(true, typeof res.links.next.get == 'function')
       done()
     })
+  })
+
+  test('Store value without key', function (done) {
+    db.post('users', users.kelsey)
+    .then(function (res) {
+      assert.equal(201, res.statusCode);
+      done();
+    });
   })
 
   test('Store value at key', function (done) {
