@@ -36,9 +36,9 @@
     "parse-link-header": "~0.1.0"
   },
   "devDependencies": {
-    "mocha": "*",
     "expect.js": "0.1.x",
-    "nock": "*"
+    "mocha": "*",
+    "nock": "^0.34.0"
   },
   "scripts": {
     "test": "make test"
