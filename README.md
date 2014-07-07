@@ -1,4 +1,6 @@
-# orchestrate.js [![Build Status](https://travis-ci.org/orchestrate-io/orchestrate.js.png)](https://travis-ci.org/orchestrate-io/orchestrate.js)
+# orchestrate.js [![Build Status](https://travis-ci.org/orchestrate-io/orchestrate.js.png)](https://travis-ci.org/orchestrate-io/orchestrate.js) [![Coverage Status](https://coveralls.io/repos/orchestrate-io/orchestrate.js/badge.png)](https://coveralls.io/r/orchestrate-io/orchestrate.js)
+
+[![NPM](https://nodei.co/npm/orchestrate.png)](https://nodei.co/npm/orchestrate/)
 
 Node Driver for [Orchestrate.io](http://orchestrate.io).
 

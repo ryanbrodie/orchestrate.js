@@ -7,3 +7,6 @@ notifications:
   email:
     - steve@bowery.io
     - max@orchestrate.io
+
+after_success:
+- npm run coveralls
