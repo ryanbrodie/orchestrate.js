@@ -36,11 +36,17 @@
     "parse-link-header": "~0.1.0"
   },
   "devDependencies": {
+    "coveralls": "^2.11.0",
     "expect.js": "0.1.x",
+    "jscoverage": "^0.5.4",
     "mocha": "*",
+    "mocha-lcov-reporter": "0.0.1",
     "nock": "^0.34.0"
   },
   "scripts": {
-    "test": "make test"
+    "test": "npm run cov && ./node_modules/.bin/mocha -u tdd",
+    "cov": "./node_modules/.bin/jscoverage lib lib-cov",
+    "report": "npm run cov && ./node_modules/.bin/mocha -u tdd -R html-cov > coverage.html",
+    "coveralls": "npm run cov && ./node_modules/.bin/mocha -u tdd -R mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js"
   }
 }
