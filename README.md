@@ -51,20 +51,6 @@ db.get('collection', 'key')
 })
 ```
 
-To get a value at a specific ref:
-
-
-
-```javascript
-db.get('collection', 'key', 'ref')
-.then(function (result) {
-
-})
-.fail(function (err) {
-
-})
-```
-
 To set a value:
 
 ```javascript
@@ -118,6 +104,32 @@ db.remove('collection', 'key', true)
 ```
 
 The last parameter is optional. If supplied the ref history will be removed as well.
+
+## Refs
+
+To get a value at a specific ref:
+
+```javascript
+db.get('collection', 'key', 'ref')
+.then(function (result) {
+
+})
+.fail(function (err) {
+
+})
+```
+
+To list refs for a particular key in a collection:
+
+```javascript
+db.list_refs('collection', 'key')
+.then(function (result) {
+  var items = result.body.results;
+})
+.fail(function (err) {
+
+})
+```
 
 ## Collection Creation
 
