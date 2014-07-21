@@ -50,6 +50,8 @@ var page2Response = {
 var fakeOrchestrate = nock('https://api.orchestrate.io/')
   .get('/v0/users/sjkaliski%40gmail.com')
   .reply(200, users.steve)
+  .get('/v0/users/sjkaliski%40gmail.com/refs/o231ou3hf')
+  .reply(200, users.steve)
   .get('/v0/users')
   .reply(200, listResponse, {'Link':'</v0/users?limit=2&afterKey=002>; rel="next"'})
   .post('/v0/users')
@@ -68,6 +70,15 @@ var fakeOrchestrate = nock('https://api.orchestrate.io/')
 suite('Key-Value', function () {
   test('Get value by key', function (done) {
     db.get('users', 'sjkaliski@gmail.com')
+    .then(function (res) {
+      assert.equal(200, res.statusCode)
+      assert.deepEqual(users.steve, res.body)
+      done()
+    })
+  })
+
+  test('Get value by key and ref', function (done) {
+    db.get('users', 'sjkaliski@gmail.com', 'o231ou3hf')
     .then(function (res) {
       assert.equal(200, res.statusCode)
       assert.deepEqual(users.steve, res.body)
