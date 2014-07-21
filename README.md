@@ -51,6 +51,20 @@ db.get('collection', 'key')
 })
 ```
 
+To get a value at a specific ref:
+
+
+
+```javascript
+db.get('collection', 'key', 'ref')
+.then(function (result) {
+
+})
+.fail(function (err) {
+
+})
+```
+
 To set a value:
 
 ```javascript
