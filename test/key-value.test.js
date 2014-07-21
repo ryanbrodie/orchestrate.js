@@ -35,6 +35,39 @@ var users = {
   }
 }
 
+var refsList = {
+  "count": 3,
+  "results": [
+    {
+      "path": {
+        "collection": "users",
+        "key": "sjkaliski@gmail.com",
+        "ref": "cbb48f9464612f20"
+      },
+      "value": {},
+      "reftime": 1400085119216
+    },
+    {
+      "path": {
+        "collection": "users",
+        "key": "sjkaliski@gmail.com",
+        "ref": "",
+        "tombstone": true
+      },
+      "reftime": 1400085117084
+    },
+    {
+      "path": {
+        "collection": "users",
+        "key": "sjkaliski@gmail.com",
+        "ref": "cbb48f9464612f20"
+      },
+      "value": {},
+      "reftime": 1400085084739
+    }
+  ]
+}
+
 var listResponse = {
   "count": 1,
   "next": "/v0/users?limit=2&afterKey=002",
@@ -52,6 +85,8 @@ var fakeOrchestrate = nock('https://api.orchestrate.io/')
   .reply(200, users.steve)
   .get('/v0/users/sjkaliski%40gmail.com/refs/o231ou3hf')
   .reply(200, users.steve)
+  .get('/v0/users/sjkaliski%40gmail.com/refs')
+  .reply(200, refsList, {'Link':'</v0/users/sjkaliski%40gmail.com/refs?limit=2&afterKey=002>; rel="next"'})
   .get('/v0/users')
   .reply(200, listResponse, {'Link':'</v0/users?limit=2&afterKey=002>; rel="next"'})
   .post('/v0/users')
@@ -82,6 +117,16 @@ suite('Key-Value', function () {
     .then(function (res) {
       assert.equal(200, res.statusCode)
       assert.deepEqual(users.steve, res.body)
+      done()
+    })
+  })
+
+  test('List refs for a key', function (done) {
+    db.list_refs('users', 'sjkaliski@gmail.com')
+    .then(function (res) {
+      assert.equal(200, res.statusCode)
+      assert.deepEqual(users.steve.email, res.body.results[0].path.key)
+      assert.equal(true, typeof res.links.next.get == 'function')
       done()
     })
   })
