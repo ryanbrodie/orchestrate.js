@@ -257,6 +257,7 @@ db.newEventBuilder()
 .from('users', 'Steve')
 .type('update')
 .data({"text": "Hello!"})
+.create()
 ```
 
 Creating an event at a specified time:
@@ -266,15 +267,39 @@ db.newEventBuilder()
 .type('update')
 .time(1384534722568)
 .data({"text": "Hello!"})
+.create()
 ```
 
-Getting events:
+Listing events:
 ```javascript
 db.newEventReader()
 .from('users', 'Steve')
 .start(1384534722568)
 .end(1384535726540)
 .type('update')
+.list()
+```
+
+Getting a specific event:
+
+``` javascript
+db.newEventReader()
+.from('users', 'Steve')
+.time(1369832019085)
+.ordinal(9)
+.type('update')
+.get()
+```
+
+Deleting an event:
+
+``` javascript
+db.newEventBuilder()
+.from('users', 'Steve')
+.type('update')
+.time(1369832019085)
+.ordinal(9)
+.remove()
 ```
 
 ## Validate Key
