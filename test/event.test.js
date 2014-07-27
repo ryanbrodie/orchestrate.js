@@ -49,7 +49,7 @@ var list = {
 
 // Override http requests.
 var fakeOrchestrate = nock('https://api.orchestrate.io')
-  .get('/v0/users/sjkaliski%40gmail.com/events/update')
+  .get('/v0/users/sjkaliski%40gmail.com/events/update?limit=2')
   .reply(200, list)
   .get('/v0/users/sjkaliski%40gmail.com/events/update/1369832019085/9')
   .reply(200, list.results[0])
@@ -65,6 +65,7 @@ suite('Event', function () {
     db.newEventReader()
     .from('users', 'sjkaliski@gmail.com')
     .type('update')
+    .limit(2)
     .list()
     .then(function (res) {
       assert.equal(res.statusCode, 200)
