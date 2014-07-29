@@ -57,7 +57,7 @@ var fakeOrchestrate = nock('https://api.orchestrate.io')
   .reply(201)
   .put('/v0/users/sjkaliski%40gmail.com/events/update/1369832019085/9')
   .reply(201)
-  .delete('/v0/users/sjkaliski%40gmail.com/events/update/1369832019085/9')
+  .delete('/v0/users/sjkaliski%40gmail.com/events/update/1369832019085/9?purge=true')
   .reply(204)
 
 suite('Event', function () {
@@ -124,6 +124,7 @@ suite('Event', function () {
     .type('update')
     .time(1369832019085)
     .ordinal(9)
+    .ref('ae3dfa4325abe21e')
     .remove()
     .then(function (res) {
       assert.equal(res.statusCode, 204)
