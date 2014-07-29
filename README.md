@@ -291,6 +291,35 @@ db.newEventReader()
 .get()
 ```
 
+Updating an event:
+
+``` javascript
+db.newEventBuilder()
+.from('users', 'Steve')
+.type('update')
+.time(1369832019085)
+.ordinal(9)
+.data({
+  "text": "Orchestrate is awesome!"
+})
+.update()
+```
+
+Updating an event, conditionally:
+
+``` javascript
+db.newEventBuilder()
+.from('users', 'Steve')
+.type('update')
+.time(1369832019085)
+.ordinal(9)
+.data({
+  "text": "Orchestrate is awesome!"
+})
+.ref('ae3dfa4325abe21e')
+.update()
+```
+
 Deleting an event:
 
 ``` javascript
