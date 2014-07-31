@@ -24,7 +24,7 @@
     "url": "http://stevekaliski.com",
     "name": "Steve Kaliski"
   },
-  "version": "0.3.1",
+  "version": "0.3.2",
   "main": "index",
   "tags": [
     "orchestrate",
