@@ -14,6 +14,7 @@
     "time-series"
   ],
   "homepage": "http://orchestrate.io/docs/api",
+  "repository": "orchestrate-io/orchestrate.js",
   "bugs": {
     "url": "https://github.com/orchestrate-io/orchestrate.js/issues",
     "email": "support@orchestrate.io"
