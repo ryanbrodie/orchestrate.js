@@ -239,6 +239,16 @@ db.newGraphReader()
 ```
 This will return all of the things that friends of Steve have liked. This assumes a friend relation has previously been defined between Steve and another user.
 
+Orchestrate supports offsets and limits for graph relationships as well. To set those values:
+```javascript
+db.newGraphReader()
+.get()
+.limit(1)
+.offset(1)
+.from('users', 'Steve')
+.related('friends', 'likes')
+```
+
 If we want to delete a graph relationship:
 ```javascript
 db.newGraphBuilder()
