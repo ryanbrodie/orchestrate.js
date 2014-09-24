@@ -66,6 +66,8 @@ var fakeOrchestrate = nock('https://api.orchestrate.io/')
     "count": 1,
     "max_score": 0.10848885029554367
   })
+  .get('/v0/users?query=new%20york&sort=value.name%3Adesc')
+  .reply(200)
   .delete('/v0/users?force=true')
   .reply(204)
 
@@ -91,6 +93,17 @@ suite('Search', function () {
     .then(function (res) {
       assert.equal(200, res.statusCode)
       assert.deepEqual(res.body.results[0].value, users.steve)
+      done()
+    })
+  })
+
+  test('Get value by query and sort by name descending', function (done) {
+    db.newSearchBuilder()
+    .collection('users')
+    .sort('name', 'desc')
+    .query('new york')
+    .then(function (res) {
+      assert.equal(200, res.statusCode)
       done()
     })
   })
