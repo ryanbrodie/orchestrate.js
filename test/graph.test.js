@@ -43,7 +43,7 @@ var fakeOrchestrate = nock('https://api.orchestrate.io')
     ],
     "count": 1
   })
-  .get('/v0/users/sjkaliski%40gmail.com/relations/friends/friends')
+  .get('/v0/users/sjkaliski%40gmail.com/relations/friends/friends?limit=1&offset=2')
   .reply(200, {
     "results": [
       {
@@ -80,6 +80,8 @@ suite('Graph', function () {
   test('Get distant graph relationship', function (done) {
     db.newGraphReader()
     .get()
+    .limit(1)
+    .offset(2)
     .from('users', 'sjkaliski@gmail.com')
     .related('friends', 'friends')
     .then(function (res) {

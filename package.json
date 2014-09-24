@@ -25,14 +25,14 @@
     "url": "http://stevekaliski.com",
     "name": "Steve Kaliski"
   },
-  "version": "0.3.4",
+  "version": "0.3.6",
   "main": "index",
   "tags": [
     "orchestrate",
     "driver"
   ],
   "dependencies": {
-    "request": "~2.27.0",
+    "request": "~2.40.0",
     "kew": "~0.2.2",
     "parse-link-header": "~0.1.0"
   },
