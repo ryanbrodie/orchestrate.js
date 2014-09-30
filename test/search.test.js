@@ -70,6 +70,8 @@ var fakeOrchestrate = nock('https://api.orchestrate.io/')
   .reply(200)
   .delete('/v0/users?force=true')
   .reply(204)
+  .get('/v0/users?query=new%20york&sort=value.name%3Adesc%2Cvalue.age%3Aasc')
+  .reply(200)
 
 suite('Search', function () {
   test('Get value by query', function (done) {
@@ -106,5 +108,18 @@ suite('Search', function () {
       assert.equal(200, res.statusCode)
       done()
     })
+  })
+
+  test('Multiple field sort', function (done) {
+    db.newSearchBuilder()
+    .collection('users')
+    .sort('name', 'desc')
+    .sort('age', 'asc')
+    .query('new york')
+    .then(function (res) {
+      assert.equal(200, res.statusCode)
+      done()
+    })
+    .fail(done)
   })
 })
