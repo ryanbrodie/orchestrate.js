@@ -72,6 +72,8 @@ var fakeOrchestrate = nock('https://api.orchestrate.io/')
   .reply(204)
   .get('/v0/users?query=new%20york&sort=value.name%3Adesc%2Cvalue.age%3Aasc')
   .reply(200)
+  .get('/v0/users?query=location%3ANEAR%3A%7Blat%3A1%20lon%3A1%20dist%3A1km%7D&sort=value.name%3Adesc%2Cvalue.location%3Adist%3Aasc')
+  .reply(200)
 
 suite('Search', function () {
   test('Get value by query', function (done) {
@@ -116,6 +118,19 @@ suite('Search', function () {
     .sort('name', 'desc')
     .sort('age', 'asc')
     .query('new york')
+    .then(function (res) {
+      assert.equal(200, res.statusCode)
+      done()
+    })
+    .fail(done)
+  })
+
+  test('Geo queries support', function (done) {
+    db.newSearchBuilder()
+    .collection('users')
+    .sort('name', 'desc')
+    .sort('location', 'dist:asc')
+    .query('location:NEAR:{lat:1 lon:1 dist:1km}')
     .then(function (res) {
       assert.equal(200, res.statusCode)
       done()
