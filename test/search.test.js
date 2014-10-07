@@ -22,6 +22,11 @@ var users = {
 
 // Override http requests.
 var fakeOrchestrate = nock('https://api.orchestrate.io/')
+  .get('/v0/users?query=denver')
+  .reply(200, {
+    "results": [],
+    "count": 0
+  })
   .get('/v0/users?query=new%20york&limit=5&offset=2')
   .reply(200, {
     "results": [
@@ -136,5 +141,13 @@ suite('Search', function () {
       done()
     })
     .fail(done)
+  })
+
+  test('Calling search() directly on the client w/o options', function (done) {
+    db.search('users', 'denver').then(function (res) {
+      assert.equal(200, res.statusCode);
+      assert.equal(res.body.count, 0);
+      done()
+    })
   })
 })
