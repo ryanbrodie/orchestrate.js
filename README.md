@@ -76,7 +76,8 @@ db.post('collection', {
   "twitter": "@stevekaliski"
 })
 .then(function (result) {
-
+  // retrieve server generated key
+  var key = (result.headers.location.split("/"))[3];
 })
 .fail(function (err) {
 
